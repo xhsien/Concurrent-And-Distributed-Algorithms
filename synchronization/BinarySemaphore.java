@@ -5,7 +5,7 @@ import utils.Util;
 public class BinarySemaphore {
     private boolean value;
 
-    BinarySemaphore(boolean iv) {
+    public BinarySemaphore(boolean iv) {
         value = iv;
     }
 
