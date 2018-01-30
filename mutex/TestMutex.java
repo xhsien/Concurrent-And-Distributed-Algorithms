@@ -17,14 +17,18 @@ public class TestMutex extends Thread {
     }
 
     void CriticalSection() {
-        processInCS++;
-        System.out.println(m_id + " enters CS. " + processInCS +  " process in CS.");
+        synchronized (this) {
+            processInCS++;
+            System.out.println(m_id + " enters CS. " + processInCS + " process in CS.");
+        }
         Util.sleep(r.nextInt(1000));
     }
 
     void nonCriticalSection() {
-        processInCS--;
-        System.out.println(m_id + " exits CS.  " + processInCS + " process in CS.");
+        synchronized (this) {
+            processInCS--;
+            System.out.println(m_id + " exits CS.  " + processInCS + " process in CS.");
+        }
         Util.sleep(r.nextInt(1000));
     }
 
@@ -39,8 +43,9 @@ public class TestMutex extends Thread {
 
     public static void main(String[] args) throws Exception {
         // modify parameters for testing
-        int n_process = 2;
-        Lock lock = new Bakery(n_process);
+        int n_process = 5;
+        int k_mutual = 2;
+        Lock lock = new Semaphore(k_mutual);
 
         TestMutex thread[] = new TestMutex[n_process];
 
