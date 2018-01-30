@@ -6,4 +6,9 @@ public class Util {
             Thread.sleep(time);
         } catch (InterruptedException e) {}
     }
+    public static void wait(Object obj) {
+        try {
+            obj.wait();
+        } catch (InterruptedException e) {}
+    }
 }
