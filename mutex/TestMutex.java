@@ -9,6 +9,8 @@ public class TestMutex extends Thread {
     private Lock m_lock;
     private Random r = new Random();
 
+    private static Object obj = new Object();
+
     private static int processInCS = 0;
 
     public TestMutex(int id, Lock lock) {
@@ -17,7 +19,7 @@ public class TestMutex extends Thread {
     }
 
     void CriticalSection() {
-        synchronized (this) {
+        synchronized (obj) {
             processInCS++;
             System.out.println(m_id + " enters CS. " + processInCS + " process in CS.");
         }
@@ -25,7 +27,7 @@ public class TestMutex extends Thread {
     }
 
     void nonCriticalSection() {
-        synchronized (this) {
+        synchronized (obj) {
             processInCS--;
             System.out.println(m_id + " exits CS.  " + processInCS + " process in CS.");
         }
@@ -43,8 +45,8 @@ public class TestMutex extends Thread {
 
     public static void main(String[] args) throws Exception {
         // modify parameters for testing
-        int n_process = 5;
-        int k_mutual = 2;
+        int n_process = 7;
+        int k_mutual = 4;
         Lock lock = new Semaphore(k_mutual);
 
         TestMutex thread[] = new TestMutex[n_process];
