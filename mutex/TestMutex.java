@@ -13,12 +13,12 @@ public class TestMutex extends Thread {
 
     private static int processInCS = 0;
 
-    public TestMutex(int id, Lock lock) {
+    private TestMutex(int id, Lock lock) {
         m_id = id;
         m_lock = lock;
     }
 
-    void CriticalSection() {
+    private void CriticalSection() {
         synchronized (obj) {
             processInCS++;
             System.out.println(m_id + " enters CS. " + processInCS + " process in CS.");
@@ -26,7 +26,7 @@ public class TestMutex extends Thread {
         Util.sleep(r.nextInt(1000));
     }
 
-    void nonCriticalSection() {
+    private void nonCriticalSection() {
         synchronized (obj) {
             processInCS--;
             System.out.println(m_id + " exits CS.  " + processInCS + " process in CS.");
