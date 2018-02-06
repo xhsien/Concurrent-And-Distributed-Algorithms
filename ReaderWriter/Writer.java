@@ -1,4 +1,4 @@
-package synchronization;
+package ReaderWriter;
 
 import utils.Util;
 
