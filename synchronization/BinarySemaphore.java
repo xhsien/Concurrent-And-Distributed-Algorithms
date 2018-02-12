@@ -3,11 +3,9 @@ package mutex;
 import utils.Util;
 
 public class BinarySemaphore {
-    private boolean value;
+    private boolean value = true;
 
-    public BinarySemaphore(boolean iv) {
-        value = iv;
-    }
+    public BinarySemaphore() {}
 
     public synchronized void P() {
         while (value == false)
