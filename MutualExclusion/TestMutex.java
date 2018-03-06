@@ -19,7 +19,6 @@ public class TestMutex extends Thread {
             numProcessInCS++;
             System.out.println(id + " enters CS. " + numProcessInCS + " process in CS.");
         }
-        Util.sleep(100, 1000);
     }
 
     private void nonCriticalSection() {
@@ -27,15 +26,16 @@ public class TestMutex extends Thread {
             numProcessInCS--;
             System.out.println(id + " exits CS.  " + numProcessInCS + " process in CS.");
         }
-        Util.sleep(500, 2000);
     }
 
     public void run() {
         while (true) {
             lock.requestCS(id);
             CriticalSection();
+            Util.sleep(100, 1000);
             nonCriticalSection();
             lock.releaseCS(id);
+            Util.sleep(100, 1000);
         }
     }
 }

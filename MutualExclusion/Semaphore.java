@@ -1,7 +1,5 @@
 package MutualExclusion;
 
-import synchronization.CountingSemaphore;
-
 public class Semaphore implements Lock {
     private CountingSemaphore semaphore;
 
