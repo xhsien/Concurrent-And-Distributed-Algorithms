@@ -14,4 +14,14 @@ public class Peterson implements Lock {
     public void releaseCS(int i) {
         wantCS[i] = false;
     }
+
+    public static void main(String[] args) {
+        Lock lock = new Peterson();
+
+        TestMutex processA = new TestMutex(0, lock);
+        TestMutex processB = new TestMutex(1, lock);
+
+        processA.start();
+        processB.start();
+    }
 }

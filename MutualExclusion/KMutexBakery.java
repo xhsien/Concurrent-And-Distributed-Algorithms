@@ -1,7 +1,8 @@
 package MutualExclusion;
 
-public class Bakery implements Lock {
+public class KMutexBakery implements Lock {
     private int n_process;
+    private int k_mutex;
 
     private volatile boolean[] choosing;
     private volatile int[] number;
@@ -10,8 +11,9 @@ public class Bakery implements Lock {
         return number[j] < number[i] || (number[j] == number[i] && j < i);
     }
 
-    public Bakery(int n_process) {
+    public KMutexBakery(int n_process, int k_mutex) {
         this.n_process = n_process;
+        this.k_mutex = k_mutex;
 
         choosing = new boolean[n_process];
         number = new int[n_process];
@@ -29,9 +31,15 @@ public class Bakery implements Lock {
         number[i]++;
         choosing[i] = false;
 
-        for (int j = 0; j < n_process; j++) {
-            while (choosing[j]);
-            while (number[j] != 0 && smaller(j, i));
+        while (true) {
+            int numSmaller = 0;
+            for (int j = 0; j < n_process; j++) {
+                while (choosing[j]);
+                if (number[j] != 0 && smaller(j, i))
+                    numSmaller++;
+            }
+            if (numSmaller < k_mutex)
+                break;
         }
     }
 
@@ -40,8 +48,9 @@ public class Bakery implements Lock {
     }
 
     public static void main(String[] args) {
-        int n_process = 4;
-        Lock lock = new Bakery(n_process);
+        int n_process = 10;
+        int k_mutex = 2;
+        Lock lock = new KMutexBakery(n_process, k_mutex);
 
         TestMutex process[] = new TestMutex[n_process];
 

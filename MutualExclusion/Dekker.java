@@ -20,4 +20,14 @@ public class Dekker implements Lock {
         turn = 1 - i;
         wantCS[i] = false;
     }
+
+    public static void main(String[] args) {
+        Lock lock = new Dekker();
+
+        TestMutex processA = new TestMutex(0, lock);
+        TestMutex processB = new TestMutex(1, lock);
+
+        processA.start();
+        processB.start();
+    }
 }

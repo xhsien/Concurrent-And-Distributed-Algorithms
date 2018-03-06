@@ -35,4 +35,16 @@ public class PetersonScaled implements Lock {
     public void releaseCS(int i) {
         _releaseCS(n_process + i);
     }
+
+    public static void main(String[] args) {
+        int n_process = 4;
+        Lock lock = new PetersonScaled(n_process);
+
+        TestMutex process[] = new TestMutex[n_process];
+
+        for (int i = 0; i < n_process; i++) {
+            process[i] = new TestMutex(i, lock);
+            process[i].start();
+        }
+    }
 }
