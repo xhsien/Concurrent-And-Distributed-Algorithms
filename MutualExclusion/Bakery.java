@@ -1,4 +1,4 @@
-package mutex;
+package MutualExclusion;
 
 public class Bakery implements Lock {
     private int n_process;

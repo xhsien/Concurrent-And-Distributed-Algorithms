@@ -1,4 +1,4 @@
-package mutex;
+package MutualExclusion;
 
 public class Dekker implements Lock {
     private volatile boolean wantCS[] = {false, false};

@@ -1,4 +1,4 @@
-package mutex;
+package MutualExclusion;
 
 public interface Lock {
     void requestCS(int id);

@@ -1,4 +1,4 @@
-package mutex;
+package MutualExclusion;
 
 import utils.Util;
 

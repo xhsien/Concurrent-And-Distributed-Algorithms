@@ -1,6 +1,6 @@
 package DiningPhilosopher;
 
-import mutex.BinarySemaphore;
+import MutualExclusion.BinarySemaphore;
 
 public class Fork extends BinarySemaphore {
 
